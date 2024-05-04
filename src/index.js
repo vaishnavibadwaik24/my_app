@@ -1,13 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import './index.css';
-import App from './App';
+// import App from './App';
+import NavBar from './components/NavBar';
+import Card from './components/Card';
+import Feature from './components/Feature';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    
+    <BrowserRouter>
+      <NavBar />
+
+      <Routes>
+        <Route path="/" element={<Card />} />
+        <Route path="feature" element={<Feature />} />
+        <Route path="contact" element={<Contact />} />
+      </Routes>
+
+
+
+      <Footer />
+    </BrowserRouter>
+
   </React.StrictMode>
 );
 
