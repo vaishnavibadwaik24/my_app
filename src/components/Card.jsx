@@ -1,33 +1,39 @@
 import img from '../img.jpg';
 import { useState, useEffect } from 'react';
+import {API_BASE_URL,IMAGE_URL} from '../apiConfig';
 import axios from 'axios';
+import DOMPurify from 'dompurify'; 
 
 export default function Card() {
 
   const [data, setData] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
       fetchData() 
     },[])
 
     const fetchData = async () => {
-        await axios.get(`http://127.0.0.1:8000/api/products`).then(({data})=>{
+        await axios.get(`${API_BASE_URL}/products`).then(({data})=>{
             setData(data.products)
         })
     }
+
+    const sanitizeHTML = (html) => {
+      return DOMPurify.sanitize(html);
+    };
 
   return (
     <>
     <div className="container">
       <div className="row">
-        {data.map((row,key)=>(
+        {data.map((row)=>(
 
         <div className="col pb-5">
           <div className="card" style={{ width: "16rem" }}>
-            <img className="card-img-top" src={img} alt="Card cap" />
+            <img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} alt="image" />
             <div className="card-body">
               <h5 className="card-title">{row.title}</h5>
-              <p className="card-text">{row.description}</p>
+                  <p className="card-text" dangerouslySetInnerHTML={{ __html: sanitizeHTML(row.description) }} />
               <a href="#" className="btn btn-primary">Add To Cart</a>
             </div>
           </div>

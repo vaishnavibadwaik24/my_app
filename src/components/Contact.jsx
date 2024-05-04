@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {API_BASE_URL} from '../apiConfig.js';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -16,7 +17,7 @@ export default function Contact() {
       message: message
     };
  
-      const response = await axios.post('http://127.0.0.1:8000/api/contacts', formData);
+      const response = await axios.post(`${API_BASE_URL}/contacts`, formData);
       setName('');
       setEmail('');
       setMessage('');
