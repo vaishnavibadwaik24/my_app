@@ -10,19 +10,23 @@ import Feature from './components/Feature';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+import Home from './components/Home';
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     
     <BrowserRouter>
       <NavBar />
 
       <Routes>
-        <Route path="/" element={<Card />} />
+        <Route path="card" element={<Card />} />
         <Route path="feature" element={<Feature />} />
         <Route path="contact" element={<Contact />} />
+
+        <Route path='/' element={<Home />} />
       </Routes>
 
 
@@ -30,7 +34,7 @@ root.render(
       <Footer />
     </BrowserRouter>
 
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

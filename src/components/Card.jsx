@@ -1,6 +1,6 @@
-import img from '../img.jpg';
+// import img from '../img.jpg';
 import { useState, useEffect } from 'react';
-import {API_BASE_URL,IMAGE_URL} from '../apiConfig';
+import {API_BASE_URL, IMAGE_URL} from '../apiConfig';
 import axios from 'axios';
 import DOMPurify from 'dompurify'; 
 
@@ -9,14 +9,13 @@ export default function Card() {
   const [data, setData] = useState([]);
 
     useEffect(() => {
-      fetchData() 
-    },[])
-
-    const fetchData = async () => {
+      const fetchData = async () => {
         await axios.get(`${API_BASE_URL}/products`).then(({data})=>{
             setData(data.products)
         })
     }
+    fetchData();
+    },[]) 
 
     const sanitizeHTML = (html) => {
       return DOMPurify.sanitize(html);
@@ -41,6 +40,8 @@ export default function Card() {
         )
         )
       }
+      </div>
+    </div>
 
         {/* <div className="col">
           <div className="card" style={{ width: "16rem" }}>
@@ -91,8 +92,7 @@ export default function Card() {
             </div>
           </div>
         </div> */}
-      </div>
-    </div>
+      
 
     </>
   );
