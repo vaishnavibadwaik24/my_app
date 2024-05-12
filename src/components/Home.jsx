@@ -8,26 +8,43 @@ import featur2 from "../featur2.jpg";
 import featur3 from "../featur3.jpg";
 
 import { useState, useEffect } from 'react';
-import {API_BASE_URL,IMAGE_URL} from '../apiConfig';
+import {API_BASE_URL,IMAGE_URL,CART_URL} from '../apiConfig';
 import axios from 'axios';
 import DOMPurify from 'dompurify'; 
 
+// import Carousel from 'react-bootstrap/Carousel';
+
 export default function Home() {
   const [data, setData] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
 
     useEffect(() => {
       const fetchData = async () => {
         await axios.get(`${API_BASE_URL}/products`).then(({data})=>{
-            setData(data.products)
+            setData(data.products);
         })
     }
     fetchData();
     },[])
 
-    
-
     const sanitizeHTML = (html) => {
       return DOMPurify.sanitize(html);
+    };
+
+    const addToCart = async (productId,title,price) => {
+      try {
+        // console.log('ss' ,productId,title,price)
+        const response = await axios.post(`${CART_URL}`, { productId, name:title, price});
+        if (response.data) { 
+          const cartResponse = await axios.get(`${CART_URL}/count`);
+          setCartCount(cartResponse.data.cartCount);
+        }
+        else{
+          alert("Failed to Add the Product");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
   return (
@@ -35,25 +52,25 @@ export default function Home() {
 {/* start nav */}
 <div className="navbar bg-white py-10">
   <div className="flex-1">
-    <a className="btn btn-ghost text-4xl">Frutaibles</a>
+    <a className="btn btn-ghost text-4xl">Fruitables</a>
   </div>
   <div className="flex-none pr-8">
   <div className='pr-5'>
-  <button class="btn btn-ghost btn-circle">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+  <button className="btn btn-ghost btn-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
     </button>
     </div>
     <div className="dropdown dropdown-end pr-5">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
         <div className="indicator">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-          <span className="badge badge-sm indicator-item">8</span>
+          {cartCount > 0 && <span className="badge badge-sm indicator-item">{cartCount}</span>}
         </div>
       </div>
       <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-white shadow">
         <div className="card-body">
-          <span className="font-bold text-lg">8 Items</span>
-          <span className="text-info">Subtotal: $999</span>
+          <span className="font-bold text-lg">{cartCount} Items</span>
+          <span className="text-info">Subtotal</span>
           <div className="card-actions">
             <button className="btn btn-primary btn-block">View cart</button>
           </div>
@@ -95,48 +112,48 @@ export default function Home() {
 
 {/* end hero */}
 
-<div class="row col-12 g-4 px-10 mt-10 py-10">
-  <div class="col">
-    <div class="card" style={{ display: "grid", placeItems: "center" }}>
-      <img src={ret} class="card-img-top" style={{width: "150px", height: "150px"}}
+<div className="row col-12 g-4 px-10 mt-10 py-10">
+  <div className="col">
+    <div className="card" style={{ display: "grid", placeItems: "center" }}>
+      <img src={ret} className="card-img-top" style={{width: "150px", height: "150px"}}
         alt="Hollywood Sign on The Hill" />
-      <div class="card-body">
-        <h5 class="card-title">Free Shipping</h5>
-        <p class="card-text">
+      <div className="card-body">
+        <h5 className="card-title">Free Shipping</h5>
+        <p className="card-text">
         Free on order over $300
         </p>
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="card" style={{ display: "grid", placeItems: "center" }}>
-      <img src={ship} class="card-img-top" style={{width: "150px", height: "150px"}}
+  <div className="col">
+    <div className="card" style={{ display: "grid", placeItems: "center" }}>
+      <img src={ship} className="card-img-top" style={{width: "150px", height: "150px"}}
         alt="Palm Springs Road" />
-      <div class="card-body">
-        <h5 class="card-title">Security Payment</h5>
-        <p class="card-text">
+      <div className="card-body">
+        <h5 className="card-title">Security Payment</h5>
+        <p className="card-text">
         100% security payment
         </p>
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="card" style={{ display: "grid", placeItems: "center" }}>
-      <img src={payment} class="card-img-top" style={{width: "150px", height: "150px"}}
+  <div className="col">
+    <div className="card" style={{ display: "grid", placeItems: "center" }}>
+      <img src={payment} className="card-img-top" style={{width: "150px", height: "150px"}}
         alt="Los Angeles Skyscrapers" />
-      <div class="card-body">
-        <h5 class="card-title">30 Day Return</h5>
-        <p class="card-text">30 day money guarantee</p>
+      <div className="card-body">
+        <h5 className="card-title">30 Day Return</h5>
+        <p className="card-text">30 day money guarantee</p>
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="card" style={{ display: "grid", placeItems: "center" }}>
-      <img src={supp} class="card-img-top item-center" style={{width: "150px", height: "150px"}}
+  <div className="col">
+    <div className="card" style={{ display: "grid", placeItems: "center" }}>
+      <img src={supp} className="card-img-top item-center" style={{width: "150px", height: "150px"}}
         alt="Skyscrapers" />
-      <div class="card-body">
-        <h5 class="card-title text-center">24/7 Support</h5>
-        <p class="card-text">
+      <div className="card-body">
+        <h5 className="card-title text-center">24/7 Support</h5>
+        <p className="card-text">
         Support every time fast
         </p>
       </div>
@@ -146,25 +163,29 @@ export default function Home() {
 
 {/* START CARD */}
 <div className="container pt-10">
-  <h1 className="text-5xl font-bold text-gray-900 pl-10">Our Organic Products</h1>
-      <div className="row pt-10 px-10">
-        {data.map((row)=>(
-
-        <div className="col pb-5">
-          <div className="card" style={{ width: "16rem" }}>
-            <img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} alt="image" />
-            <div className="card-body">
-              <h5 className="card-title">{row.title}</h5>
-                  <p className="card-text" dangerouslySetInnerHTML={{ __html: sanitizeHTML(row.description) }} />
-              <a href="#" className="btn btn-primary">Add To Cart</a>
-            </div>
-          </div>
+        <h1 className="text-5xl font-bold text-gray-900 pl-10">Our Organic Products</h1>
+        <div className="row pt-10 px-10">
+          {data.map((row, index) => {
+            const formattedPrice = new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: 'INR',
+            }).format(parseFloat(row.price));
+            return (
+              <div className="col pb-5" key={index}>
+                <div className="card" style={{ width: "16rem" }}>
+                  <img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} alt="image" />
+                  <div className="card-body">
+                    <h5 className="card-title">{row.title}</h5>
+                    <p className="card-text" dangerouslySetInnerHTML={{ __html: sanitizeHTML(row.description) }} />
+                    <p className="text-dark fs-5 fw-bold mb-0">{formattedPrice}</p>
+                    <button onClick={() => addToCart(row.id, row.title, row.price)} className="btn btn-primary">Add To Cart</button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        )
-        )
-      }
       </div>
-    </div>
 {/* end card */}
 
 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 py-16 px-10 ">
@@ -218,7 +239,7 @@ export default function Home() {
 					<path fill="currentColor" d="M232,246.857V16H16V416H54.4ZM48,48H200V233.143L48,377.905Z"></path>
 					<path fill="currentColor" d="M280,416h38.4L496,246.857V16H280ZM312,48H464V233.143L312,377.905Z"></path>
 				</svg>
-				<p className="px-6 py-1 text-lg italic">AThe fruit is AMAZING! Best quality I have ever seen…it rivals my local Sunday farmers market.</p>
+				<p className="px-6 py-1 text-lg italic">The fruit is AMAZING! Best quality I have ever seen…it rivals my local Sunday farmers market.</p>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="absolute bottom-0 right-0 w-8 h-8 text-gray-300">
 					<path fill="currentColor" d="M280,185.143V416H496V16H457.6ZM464,384H312V198.857L464,54.1Z"></path>
 					<path fill="currentColor" d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"></path>

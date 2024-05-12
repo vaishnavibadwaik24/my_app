@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import './index.css';
@@ -18,21 +18,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
     
-    <BrowserRouter>
-      <NavBar />
-
-      <Routes>
-        <Route path="card" element={<Card />} />
-        <Route path="feature" element={<Feature />} />
-        <Route path="contact" element={<Contact />} />
-
-        <Route path='/' element={<Home />} />
-      </Routes>
-
-
-
-      <Footer />
-    </BrowserRouter>
+  <BrowserRouter>
+    <NavBar />
+    <Routes>
+      <Route path="/card" element={<Card />} />
+      <Route path="/feature" element={<Feature />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/" element={<Home />} />
+    </Routes>
+    <Footer />
+  </BrowserRouter>
 
   // </React.StrictMode>
 );
