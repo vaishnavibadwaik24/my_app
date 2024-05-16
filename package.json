@@ -12,7 +12,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "react-shopping-cart": "^1.9.5",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.10.8",
     "web-vitals": "^2.1.4"
   },

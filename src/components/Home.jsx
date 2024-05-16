@@ -11,8 +11,10 @@ import { useState, useEffect } from 'react';
 import {API_BASE_URL,IMAGE_URL,CART_URL} from '../apiConfig';
 import axios from 'axios';
 import DOMPurify from 'dompurify'; 
+import Slider from "react-slick";
 
-// import Carousel from 'react-bootstrap/Carousel';
+import 'slick-carousel/slick/slick.css';
+
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -45,6 +47,17 @@ export default function Home() {
       } catch (error) {
         console.log(error);
       }
+    };
+    
+    const settings = {
+      // dots: true,
+      // infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      speed: 4000,
+      autoplaySpeed: 4000,
+      cssEase: "linear"
     };
 
   return (
@@ -99,17 +112,21 @@ export default function Home() {
 {/* End nav */}
 {/* start hero */}
 <section className="p-6 bg-gray-100 text-gray-800 py-10">
-  <div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
-    <div className=" px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-3 bg-gray-50">
-      <span className="block mb-2 text-red-600">100% Organic Foods</span>
-      <h1 className="text-5xl font-extrabold text-gray-900">Organic Veggies & <br />Fruits Foods</h1>
-    </div>
-
-    <img src={`${IMAGE_URL}/1711558675.png`} style={{width: "400px", height: "260px"}} alt="Banner" className="object-cover rounded-md xl:col-span-2 bg-gray-500" />
-  
-  </div>
+      <div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
+        <div className="px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-3 bg-gray-50">
+          <span className="block mb-2 text-red-600">100% Organic Foods</span>
+          <h1 className="text-5xl font-extrabold text-gray-900">Organic Veggies & <br />Fruits Foods</h1>
+        </div>
+        <Slider {...settings}>
+          <div>
+            <img src={`${IMAGE_URL}/1711558675.png`} style={{ width: "500px", height: "260px" }} alt="Banner" className="object-cover rounded-md xl:col-span-2 bg-gray-500" />
+          </div>
+          <div>
+            <img src={`${IMAGE_URL}/1711558751.jpg`} style={{ width: "500px", height: "260px" }} alt="Banner" className="object-cover rounded-md xl:col-span-2 bg-gray-500" />
+          </div>
+        </Slider>
+      </div>
 </section>
-
 {/* end hero */}
 
 <div className="row col-12 g-4 px-10 mt-10 py-10">
@@ -173,7 +190,7 @@ export default function Home() {
             return (
               <div className="col pb-5" key={index}>
                 <div className="card" style={{ width: "16rem" }}>
-                  <img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} alt="image" />
+                  <img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} style={{width: "450px", height: "180px"}} alt="image" />
                   <div className="card-body">
                     <h5 className="card-title">{row.title}</h5>
                     <p className="card-text" dangerouslySetInnerHTML={{ __html: sanitizeHTML(row.description) }} />
@@ -253,5 +270,3 @@ export default function Home() {
 </>
 )
 }
-
-
