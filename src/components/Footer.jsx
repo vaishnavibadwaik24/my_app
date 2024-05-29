@@ -3,7 +3,7 @@ import React from 'react'
 export default function () {
   return (
    <>
-   <footer className="bg-white text-base-content">
+   <footer className="bg-gray-300 text-base-content">
 	<div className="container flex flex-col p-4 mx-auto md:p-8 lg:flex-row divide-gray-600">
   <div className="pb-6 col-span-full md:pb-0 md:col-span-10 col-8">
 				<a rel="noopener noreferrer" href="#" className="flex justify-center space-x-3 md:justify-start">
@@ -31,7 +31,7 @@ export default function () {
 		</div>
 	</div>
 </footer>
-   <footer className="footer p-10 bg-white text-base-content">
+   <footer className="footer p-10 bg-gray-300 text-base-content">
   <nav>
     <h6 className="footer-title text-white">Services</h6> 
     <a className="link link-hover">Branding</a>
@@ -49,12 +49,12 @@ export default function () {
     <h6 className="footer-title text-white">Legal</h6> 
     <a href='terms' className="link link-hover">Terms of use</a>
     <a href='privacy' className="link link-hover">Privacy policy</a>
-    <a href='cookies' className="link link-hover">Cookie policy</a>
+    <a href='return' className="link link-hover">Return policy</a>
 	<div id="google_translate_element"></div>
 
   </nav> 
 </footer>
-<footer className="footer footer-center p-4 bg-white text-base-content">
+<footer className="footer footer-center p-4 bg-gray-300 text-base-content">
   <aside>
     <p>© <a href="" className='text-lime-400'>Fruitables</a> - All right reserved.</p>
   </aside>

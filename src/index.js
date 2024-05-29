@@ -12,12 +12,13 @@ import Footer from './components/Footer';
 import About from './components/About';
 import Terms from './components/Terms'
 import Privacy from './components/Privacy'
-import Cookies from './components/Cookies'
+import Return from './components/Return'
 import Jobs from './components/Jobs'
 
 import Home from './components/Home';
 
 import reportWebVitals from './reportWebVitals';
+import ProductDetail from './components/ProductDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -32,9 +33,11 @@ root.render(
       <Route path='/about' element={<About />} />
       <Route path="/terms" element={<Terms />} />
       <Route path='/privacy' element={<Privacy />} />
-      <Route path='/cookies' element={<Cookies />} />
+      <Route path='/return' element={<Return />} />
       <Route path='/jobs' element={<Jobs />} />
       <Route path="/" element={<Home />} />
+      <Route path="/productDetails/:id" element={<ProductDetail />} />
+
     </Routes>
     <Footer />
   </BrowserRouter>

@@ -7,6 +7,7 @@ import featur from "../featur.jpg";
 import featur2 from "../featur2.jpg";
 import featur3 from "../featur3.jpg";
 
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {API_BASE_URL,IMAGE_URL,CART_URL} from '../apiConfig';
 import axios from 'axios';
@@ -198,7 +199,7 @@ export default function Home() {
             return (
               <div className="col pb-5" key={index}>
                 <div className="card" style={{ width: "16rem" }}>
-                  <img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} style={{width: "450px", height: "180px"}} alt="image" />
+                  <Link to={`/productDetails/${row.id}`} ><img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} style={{width: "450px", height: "180px"}} alt="image" /></Link>
                   <div className="card-body">
                     <h5 className="card-title">{row.title}</h5>
                     <p className="card-text" dangerouslySetInnerHTML={{ __html: sanitizeHTML(row.description) }} />
