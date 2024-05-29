@@ -9,6 +9,11 @@ import Card from './components/Card';
 import Feature from './components/Feature';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import About from './components/About';
+import Terms from './components/Terms'
+import Privacy from './components/Privacy'
+import Cookies from './components/Cookies'
+import Jobs from './components/Jobs'
 
 import Home from './components/Home';
 
@@ -24,6 +29,11 @@ root.render(
       <Route path="/card" element={<Card />} />
       <Route path="/feature" element={<Feature />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path='/about' element={<About />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path='/privacy' element={<Privacy />} />
+      <Route path='/cookies' element={<Cookies />} />
+      <Route path='/jobs' element={<Jobs />} />
       <Route path="/" element={<Home />} />
     </Routes>
     <Footer />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from "react";
 import ret from "../ret.jpg";
 import ship from "../ship.png";
 import payment from "../payment.png";
@@ -13,13 +13,16 @@ import axios from 'axios';
 import DOMPurify from 'dompurify'; 
 import Slider from "react-slick";
 
-import 'slick-carousel/slick/slick.css';
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
+  
+
+  
   const [data, setData] = useState([]);
   const [cartCount, setCartCount] = useState(0);
-
+ 
     useEffect(() => {
       const fetchData = async () => {
         await axios.get(`${API_BASE_URL}/products`).then(({data})=>{
@@ -27,7 +30,15 @@ export default function Home() {
         })
     }
     fetchData();
+    fetchVisitor();
+
     },[])
+   
+    const fetchVisitor =  () => {
+       axios.get(`${API_BASE_URL}/visitor`).then().catch();
+   
+   
+  }
 
     const sanitizeHTML = (html) => {
       return DOMPurify.sanitize(html);
@@ -49,17 +60,14 @@ export default function Home() {
       }
     };
     
-    const settings = {
-      // dots: true,
-      // infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      speed: 4000,
-      autoplaySpeed: 4000,
-      cssEase: "linear"
-    };
+    let sliderRef = useRef(null);
 
+    const settings = {
+      slidesToShow: 1,
+      autoplay: true,
+      autoplaySpeed: 3000
+    };
+    
   return (
 <>
 {/* start nav */}
@@ -112,17 +120,17 @@ export default function Home() {
 {/* End nav */}
 {/* start hero */}
 <section className="p-6 bg-gray-100 text-gray-800 py-10">
-      <div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
+      <div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-4" >
         <div className="px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-3 bg-gray-50">
           <span className="block mb-2 text-red-600">100% Organic Foods</span>
           <h1 className="text-5xl font-extrabold text-gray-900">Organic Veggies & <br />Fruits Foods</h1>
         </div>
-        <Slider {...settings}>
+        <Slider ref={slider => (sliderRef = slider)} {...settings}>
           <div>
-            <img src={`${IMAGE_URL}/1711558675.png`} style={{ width: "500px", height: "260px" }} alt="Banner" className="object-cover rounded-md xl:col-span-2 bg-gray-500" />
+            <img src={`${IMAGE_URL}/1711558675.png`} style={{ width: '400px', height:'250px'}} alt="Banner" className="object-cover rounded xl:col-span-8 bg-gray-500" />
           </div>
           <div>
-            <img src={`${IMAGE_URL}/1711558751.jpg`} style={{ width: "500px", height: "260px" }} alt="Banner" className="object-cover rounded-md xl:col-span-2 bg-gray-500" />
+            <img src={`${IMAGE_URL}/1711558751.jpg`} style={{ width: '400px', height:'250px'}} alt="Banner" className="object-cover rounded xl:col-span-8 bg-gray-500" />
           </div>
         </Slider>
       </div>
