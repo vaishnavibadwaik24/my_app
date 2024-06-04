@@ -14,7 +14,9 @@ import Terms from './components/Terms'
 import Privacy from './components/Privacy'
 import Return from './components/Return'
 import Jobs from './components/Jobs'
-
+import Search from './components/Search';
+import Login from './components/Login';
+import Register from './components/Register';
 import Home from './components/Home';
 
 import reportWebVitals from './reportWebVitals';
@@ -37,6 +39,10 @@ root.render(
       <Route path='/jobs' element={<Jobs />} />
       <Route path="/" element={<Home />} />
       <Route path="/productDetails/:id" element={<ProductDetail />} />
+      <Route path="/search/:search" element={<Search />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+
 
     </Routes>
     <Footer />

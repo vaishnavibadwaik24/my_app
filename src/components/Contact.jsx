@@ -31,67 +31,64 @@ export default function Contact() {
 
   return (
     <>
-    <div className="container mt-5 pb-5">
-      <h1 className="text-center">Contact Details</h1>
-      <div className="row justify-content-center">
-        <div className="col-md-10">
-          <div className="card p-4">
-            <form onSubmit={createData}>
-            
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="form-control"
-                  placeholder="Enter Name"
-                  aria-label="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Enter Email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="message" className="form-label">
-                  Message
-                </label>
-                <textarea
-                  type="text"
-                  className="form-control"
-                  id="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                ></textarea>
-              </div>
-
-              {/* {error && <div className="alert alert-danger">{error}</div>} */}
-
-              <div className="text-center">
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </div>
-            </form>
+<section className="p-6 text-gray-800">
+  <div className="row justify-content-center">
+    <div className="col-md-10">
+        <form onSubmit={createData} className="container w-full max-w-xl p-8 mx-auto space-y-6 rounded-md shadow bg-gray-50">
+          <h2 className="w-full text-3xl font-bold leading-tight">Contact</h2>
+          
+          <div className="mb-3">
+            <label htmlFor="name" className="block mb-1 ml-1">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="block w-full p-2 rounded focus:outline-none focus:ring focus:ring-opacity-25 focus:ring-lime-600 bg-gray-100"
+              placeholder="Enter Your Name"
+              aria-label="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
-        </div>
-      </div>
+
+          <div className="mb-3">
+            <label htmlFor="email" className="block mb-1 ml-1">
+              Email
+            </label>
+            <input
+              type="email"
+              className="block w-full p-2 rounded focus:outline-none focus:ring focus:ring-opacity-25 focus:ring-lime-600 bg-gray-100"
+              placeholder="Enter Your Email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="message" className="block mb-1 ml-1">
+              Message
+            </label>
+            <textarea
+              type="text"
+              className="block w-full p-2 rounded focus:outline-none focus:ring focus:ring-opacity-25 focus:ring-lime-600 bg-gray-100"
+              id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            ></textarea>
+          </div>
+
+          {/* {error && <div className="alert alert-danger">{error}</div>} */}
+
+          <div className='text-center'>
+            <button type="submit" className="px-4 py-2 font-bold rounded shadow focus:outline-none focus:ring hover:bg-lime-400 focus:ring-opacity-50 bg-lime-500 focus:ring-lime-600 hover:ring-lime-600 text-gray-50">Send</button>
+          </div>
+        </form>
     </div>
+  </div>
+</section>
+
     </>
   );
 }

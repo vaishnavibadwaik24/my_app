@@ -18,12 +18,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
-  
-
-  
+  const [search, setSearch] = useState([]);
   const [data, setData] = useState([]);
   const [cartCount, setCartCount] = useState(0);
  
+  useEffect(() => {
+    const fetchSearch = async () => {
+      await axios.get(`${API_BASE_URL}/search/g`).then(({data})=>{
+          setData(data.products);
+      })
+  }
+  fetchSearch();
+  },[])
+
     useEffect(() => {
       const fetchData = async () => {
         await axios.get(`${API_BASE_URL}/products`).then(({data})=>{
@@ -72,7 +79,7 @@ export default function Home() {
   return (
 <>
 {/* start nav */}
-<div className="navbar bg-white py-10">
+{/* <div className="navbar bg-white py-10">
   <div className="flex-1">
     <a className="btn btn-ghost text-4xl">Fruitables</a>
   </div>
@@ -117,7 +124,7 @@ export default function Home() {
       </ul>
     </div>
   </div>
-</div>
+</div> */}
 {/* End nav */}
 {/* start hero */}
 <section className="p-6 bg-gray-100 text-gray-800 py-10">
@@ -146,7 +153,7 @@ export default function Home() {
       <div className="card-body">
         <h5 className="card-title">Free Shipping</h5>
         <p className="card-text">
-        Free on order over $300
+        Free on order over ₹300
         </p>
       </div>
     </div>
@@ -238,6 +245,34 @@ export default function Home() {
     </div>
   </div>
 </div>
+
+{/* START CARD */}
+{/* <div className="container pt-10">
+        <h1 className="text-5xl font-bold text-gray-900 pl-10">Our Categories</h1>
+        <div className="row pt-10 px-10">
+          {data.map((row, index) => {
+            // const formattedPrice = new Intl.NumberFormat('en-IN', {
+            //   style: 'currency',
+            //   currency: 'INR',
+            // }).format(parseFloat(row.price));
+            return (
+              <div className="col pb-5" key={index}>
+                <div className="card" style={{ width: "16rem" }}>
+                  <Link to={{}} ><img className="card-img-top" src={`${IMAGE_URL}/${row.photo}`} style={{width: "450px", height: "180px"}} alt="image" /></Link>
+                  <div className="card-body">
+                    <h5 className="card-title">{row.title}</h5>
+                    <p className="card-text" dangerouslySetInnerHTML={{ __html: sanitizeHTML(row.description) }} />
+                    <p className="text-dark fs-5 fw-bold mb-0">{}</p>
+                    <button onClick={() => addToCart(row.id, row.title, row.price)} className="btn btn-primary">Add To Cart</button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div> */}
+{/* end card */}
+
 {/* testimonial */}
 <section className="my-8 py-16">
 	<div className="container mx-auto flex flex-col items-center pb-6 mb-4 md:p-10 md:px-12">

@@ -56,7 +56,7 @@ export default function () {
 </footer>
 <footer className="footer footer-center p-4 bg-gray-300 text-base-content">
   <aside>
-    <p>© <a href="" className='text-lime-400'>Fruitables</a> - All right reserved.</p>
+    <p>© <a href="" className='text-lime-500'>Fruitables</a> - All right reserved.</p>
   </aside>
 </footer>
    </>

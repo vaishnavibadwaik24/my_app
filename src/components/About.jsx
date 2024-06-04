@@ -10,21 +10,21 @@ export default function About() {
   const [mainDiv, setMainDiv] = useState("d-none");
   const fetchApi = async () => {
     let siteinfo = sessionStorage.getItem('siteinfo')
-    if(siteinfo == null){
+    // if(siteinfo == null){
       await axios.get(`${API_BASE_URL}/siteinfo`).then(({data})=>{
       setData(data.siteinfo[0]['about_us'])
       setLoaderDiv("d-none");
         setMainDiv("");
       let json= data.siteinfo[0]['about_us'];
-      sessionStorage.setItem('siteinfo', json)
+      // sessionStorage.setItem('siteinfo', json)
 
       })
 
-    } else {
-      setData(siteinfo);
-      setLoaderDiv("d-none");
-      setMainDiv("");
-    }
+    // } else {
+    //   setData(siteinfo);
+    //   setLoaderDiv("d-none");
+    //   setMainDiv("");
+    // }
 
   
   };
